@@ -1,6 +1,6 @@
 # wp-vue
 
-> A simple WordPress theme that feeds
+A Vue app that consumes &amp; displays WordPress blog posts.
 
 ## Build Setup
 
