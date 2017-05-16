@@ -1,7 +1,7 @@
 {
   "name": "wp-vue",
   "description": "A simple WordPress theme that feeds",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "author": "Alex MacArthur",
   "private": true,
   "scripts": {
@@ -25,5 +25,8 @@
     "vue-template-compiler": "^2.2.1",
     "webpack": "^2.2.0",
     "webpack-dev-server": "^2.2.0"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:alexmacarthur/wp-vue.git",
+  "license": "MIT"
 }
