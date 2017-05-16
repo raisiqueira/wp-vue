@@ -5,6 +5,8 @@
 </template>
 
 <script>
+import Bitters from 'bourbon-bitters';
+
 export default {
   name: 'app',
   data () {
@@ -19,10 +21,11 @@ export default {
 </script>
 
 <style lang="scss">
+  @import "~bourbon/app/assets/stylesheets/_bourbon.scss";
+  @import "~bourbon-bitters/app/assets/stylesheets/_bitters.scss";
+
   #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
   }
 </style>
