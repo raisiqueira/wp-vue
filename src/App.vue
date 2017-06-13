@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import Bitters from 'bourbon-bitters';
-
 export default {
   name: 'app',
   data () {
@@ -21,7 +19,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "~bourbon/app/assets/stylesheets/_bourbon.scss";
   @import "~bourbon-bitters/app/assets/stylesheets/_bitters.scss";
 
   #app {

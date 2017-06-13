@@ -1,6 +1,7 @@
-var path = require('path')
-var webpack = require('webpack')
-var pathToBourbon = require('bourbon').includePaths;
+var path = require('path');
+var webpack = require('webpack');
+var bourbonPath = require('bourbon').includePaths;
+var bourbonNeatPath = require('bourbon-neat').includePaths;
 
 module.exports = {
   entry: './src/main.js',
@@ -13,19 +14,60 @@ module.exports = {
     rules: [
       {
         test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          loaders: {
-            // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-            // the "scss" and "sass" values for the lang attribute to the right configs here.
-            // other preprocessors should work out of the box, no loader config like this necessary.
-            'scss': 'vue-style-loader!css-loader!sass-loader',
-            'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-          },
-          includePaths: [
-            path.resolve(__dirname, 'node_modules/bourbon/app/assets/stylesheets/bourbon'),
-          ]
-          // other vue-loader options go here
+        use: {
+          loader: 'vue-loader',
+          options: {
+            loaders: {
+              sass: [
+                'vue-style-loader',
+                'css-loader',
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    includePaths: [
+                      bourbonPath,
+                      bourbonNeatPath
+                    ]
+                  }
+                },
+                {
+                  loader: 'sass-resources-loader',
+                  options: {
+                    resources: [
+                      bourbonPath[0] + '/_bourbon.scss',
+                      bourbonNeatPath[0] + '/_neat.scss',
+                      path.resolve(__dirname, './src/assets/scss/base/_variables.scss'),
+                      path.resolve(__dirname, './src/assets/scss/base/_mixins.scss'),
+                    ]
+                  }
+                }
+              ],
+              scss: [
+                'vue-style-loader',
+                'css-loader',
+                {
+                  loader: 'sass-loader',
+                  options: {
+                    includePaths: [
+                      bourbonPath,
+                      bourbonNeatPath
+                    ]
+                  }
+                },
+                {
+                  loader: 'sass-resources-loader',
+                  options: {
+                    resources: [
+                      bourbonPath[0] + '/_bourbon.scss',
+                      bourbonNeatPath[0] + '/_neat.scss',
+                      path.resolve(__dirname, './src/assets/scss/base/_variables.scss'),
+                      path.resolve(__dirname, './src/assets/scss/base/_mixins.scss'),
+                    ]
+                  }
+                }
+              ]
+            }
+          }
         }
       },
       {

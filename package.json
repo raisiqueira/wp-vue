@@ -12,6 +12,8 @@
     "axios": "^0.16.1",
     "bourbon": "^4.3.4",
     "bourbon-bitters": "^1.2.1",
+    "bourbon-neat": "^1.8.0",
+    "sass-resources-loader": "^1.2.1",
     "vue": "^2.2.1",
     "vue-router": "^2.1.1"
   },
