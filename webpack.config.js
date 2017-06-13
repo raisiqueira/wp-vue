@@ -60,8 +60,8 @@ module.exports = {
                     resources: [
                       bourbonPath[0] + '/_bourbon.scss',
                       bourbonNeatPath[0] + '/_neat.scss',
-                      path.resolve(__dirname, './src/assets/scss/base/_variables.scss'),
-                      path.resolve(__dirname, './src/assets/scss/base/_mixins.scss'),
+                      path.resolve(__dirname, './src/assets/scss/_variables.scss'),
+                      path.resolve(__dirname, './src/assets/scss/_mixins.scss'),
                     ]
                   }
                 }

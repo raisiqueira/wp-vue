@@ -11,7 +11,6 @@
 
 <script>
 import Axios from 'axios'
-import Bitters from 'bourbon-bitters'
 
 export default {
   name: 'Feed',
@@ -38,6 +37,7 @@ export default {
     setPosts: function() {
       return Axios.get('http://bb.dev/wp-json/wp/v2/posts')
         .then((response) => {
+          this.$emit('postsReceived');
           this.posts = response.data
           return;
         })

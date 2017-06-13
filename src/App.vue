@@ -1,25 +1,59 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <transition
+      v-on:leave="leave"
+      name="fade">
+      <Loader v-if="showLoader"/>
+    </transition>
+
+    <router-view @postsReceived="showLoader = false"></router-view>
   </div>
 </template>
 
 <script>
+import Loader from './components/Loader';
+
 export default {
   name: 'app',
-  data () {
+
+  data() {
     return {
+      showLoader: true
     }
   },
 
-  created: function () {
+  methods: {
+    leave: function () {
+      setTimeout(() => {
+        document.documentElement.style.overflow = "auto";
+      }, 250);
+    }
+  },
 
+  components: {
+    Loader
   }
 }
 </script>
 
 <style lang="scss">
-  @import "~bourbon-bitters/app/assets/stylesheets/_bitters.scss";
+  @import "assets/scss/_base.scss";
+
+  html {
+    overflow: hidden;
+
+    &.noOverflow {
+      overflow: auto;
+    }
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .25s
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0
+  }
 
   #app {
     -webkit-font-smoothing: antialiased;
