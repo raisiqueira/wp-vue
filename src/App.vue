@@ -39,14 +39,6 @@ export default {
 <style lang="scss">
   @import "assets/scss/_base.scss";
 
-  html {
-    overflow: hidden;
-
-    &.noOverflow {
-      overflow: auto;
-    }
-  }
-
   .fade-enter-active, .fade-leave-active {
     transition: opacity .25s
   }
@@ -58,5 +50,6 @@ export default {
   #app {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    padding: 2rem;
   }
 </style>

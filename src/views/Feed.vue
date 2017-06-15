@@ -35,10 +35,18 @@ export default {
 
   methods: {
     setPosts: function() {
-      return Axios.get('http://bb.dev/wp-json/wp/v2/posts')
+      Axios.get('https://www.businessboutique.com/wp-json/wp/v2/posts')
         .then((response) => {
           this.$emit('postsReceived');
           this.posts = response.data
+
+          console.log(this.posts[0].featured_media);
+
+          Axios.get('https://www.businessboutique.com/wp-json/wp/v2/media/' + this.posts[0].featured_media)
+          .then((response) => {
+            console.log(response.data);
+          });
+
           return;
         })
     }
@@ -49,5 +57,8 @@ export default {
 <style scoped lang="scss">
   ul {
     list-style: none;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 2rem;
   }
 </style>
