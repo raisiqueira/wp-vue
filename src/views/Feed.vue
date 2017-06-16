@@ -2,7 +2,7 @@
   <ul>
     <li v-for="post in posts">
       <div class="featured-image">
-        <img :src="" alt="Blog Post Featured Image"/>
+        <img :src="post.featured_image" alt="Blog Post Featured Image"/>
       </div>
       <h2>{{post.title.rendered}}</h2>
     </li>
