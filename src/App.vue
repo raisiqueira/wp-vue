@@ -39,11 +39,11 @@ export default {
 <style lang="scss">
   @import "assets/scss/_base.scss";
 
-  .fade-enter-active, .fade-leave-active {
+  .fade-leave-active {
     transition: opacity .25s
   }
 
-  .fade-enter, .fade-leave-to {
+  .fade-leave-to {
     opacity: 0
   }
 

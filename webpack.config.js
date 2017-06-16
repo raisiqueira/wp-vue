@@ -4,7 +4,7 @@ var bourbonPath = require('bourbon').includePaths;
 var bourbonNeatPath = require('bourbon-neat').includePaths;
 
 module.exports = {
-  entry: './src/main.js',
+  entry: ['babel-polyfill', './src/main.js'],
   output: {
     path: path.resolve(__dirname, './dist'),
     publicPath: '/dist/',

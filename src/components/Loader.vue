@@ -17,22 +17,10 @@ export default {
   @keyframes pulse {
     0% {
       transform: scale(0);
-      opacity: 0.0;
     }
-    25% {
-      transform: scale(0);
-      opacity: 0.1;
-    }
-    50% {
-      transform: scale(0.1);
-      opacity: 0.3;
-    }
-    75% {
-      transform: scale(0.5);
-      opacity: 0.5;
-    }
+
     100% {
-      transform: scale(1.25);
+      transform: scale(1);
       opacity: 0.0;
     }
   }
@@ -66,31 +54,19 @@ export default {
     border-radius: 50%;
     padding: 0;
     background: rgba($dark-gray, .15);
-
-    &:before,
-    &:after,
-    li {
-      content: '';
-      display: block;
-      position: absolute;
-      width: 65%;
-      height: 65%;
-      background: rgba($dark-gray, .25);
-      border-radius: 50%;
-      z-index: 1;
-    }
+    background: none;
 
     &:before {
-      width: 25%;
-      height: 25%;
+      width: 12px;
+      height: 12px;
       background: rgba($dark-gray, .65);
     }
 
     li {
       width: 100%;
       height: 100%;
-      background: rgba($dark-gray, .9);
-      animation: pulse 3s ease-out;
+      background: rgba($dark-gray, .65);
+      animation: pulse 2.5s ease-in;
       animation-iteration-count: infinite;
     }
   }
