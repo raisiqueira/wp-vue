@@ -1,8 +1,6 @@
 <template>
   <div id="app">
-    <transition
-      v-on:leave="leave"
-      name="fade">
+    <transition name="fade">
       <Loader v-if="showLoader"/>
     </transition>
 
@@ -22,14 +20,6 @@ export default {
     }
   },
 
-  methods: {
-    leave: function () {
-      setTimeout(() => {
-        document.documentElement.style.overflow = "auto";
-      }, 250);
-    }
-  },
-
   components: {
     Loader
   }
@@ -39,13 +29,13 @@ export default {
 <style lang="scss">
   @import "assets/scss/_base.scss";
 
-  .fade-leave-active {
-    transition: opacity .25s
-  }
+  // .fade-leave-active {
+  //   transition: opacity .25s
+  // }
 
-  .fade-leave-to {
-    opacity: 0
-  }
+  // .fade-leave-to {
+  //   opacity: 0
+  // }
 
   #app {
     -webkit-font-smoothing: antialiased;

@@ -1,9 +1,9 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Post from './views/Post'
-import Feed from './views/Feed'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Post from './views/Post';
+import Feed from './views/Feed';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -16,11 +16,11 @@ const routes = [
     path: '/posts/:slug',
     component: Post
   }
-]
+];
 
 const router = new VueRouter({
   mode: 'history',
   routes: routes
-})
+});
 
-export default router
+export default router;
