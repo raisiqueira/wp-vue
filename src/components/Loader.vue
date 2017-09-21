@@ -25,11 +25,6 @@ export default {
     }
   }
 
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-
   div {
     position: absolute;
     height: 100%;
@@ -40,7 +35,6 @@ export default {
     justify-content: center;
     align-items: center;
     background: $white;
-    animation: fadeIn .75s;
   }
 
   ul {

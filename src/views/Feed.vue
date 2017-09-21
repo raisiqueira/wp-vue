@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li v-for="post in posts">
-      <div class="featured-image">
+    <li v-for="post in posts" :key="post.id">
+      <div>
         <img :src="post.featured_image" alt="Blog Post Featured Image"/>
       </div>
       <h2>{{post.title.rendered}}</h2>
@@ -27,21 +27,39 @@ export default {
   },
 
   methods: {
-    async getPosts () {
+    getPosts: async function () {
       let response = await Axios.get(`${CONFIG.API_URL}/posts?per_page=8`);
-      let posts = response.data;
+      this.posts = await this.getFeaturedImages(response.data);
+      this.$emit('postsReceived');
+    },
 
-      posts.forEach(async (value, i) => {
-        let response = await Axios.get(`${CONFIG.API_URL}/media/${value.featured_media}`);
-        posts[i].featured_image = response.data.media_details.sizes.medium.source_url;
-        console.log('posts recieved and processed!');
-        this.$emit('postsReceived');
+    getFeaturedImages: function (posts) {
+      return new Promise((resolve) => {
+        let requests = posts.map((post) => {
+          return new Promise( async (resolve) => {
+            let response = await Axios.get(`${CONFIG.API_URL}/media/${post.featured_media}`);
+            post.featured_image = response.data.media_details.sizes['post-thumbnail'].source_url;
+            resolve(post);
+          });
+        });
+
+        Promise.all(requests).then((posts) => resolve(posts));
       });
     }
+  }
 }
 
 </script>
 
 <style scoped lang="scss">
+  ul {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+  }
 
+  li {
+    display: flex;
+    flex-direction: column;
+  }
 </style>

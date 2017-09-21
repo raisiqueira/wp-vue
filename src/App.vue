@@ -29,13 +29,13 @@ export default {
 <style lang="scss">
   @import "assets/scss/_base.scss";
 
-  // .fade-leave-active {
-  //   transition: opacity .25s
-  // }
+  .fade-leave-active {
+    transition: opacity .25s;
+  }
 
-  // .fade-leave-to {
-  //   opacity: 0
-  // }
+  .fade-leave-to {
+    opacity: 0
+  }
 
   #app {
     -webkit-font-smoothing: antialiased;
