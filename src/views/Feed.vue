@@ -1,10 +1,12 @@
 <template>
   <ul>
     <li v-for="post in posts" :key="post.id">
-      <div>
-        <img :src="post.featured_image" alt="Blog Post Featured Image"/>
-      </div>
-      <h2>{{post.title.rendered}}</h2>
+      <router-link :to="{ name: 'post', params: {slug: post.slug} }">
+        <div>
+          <img :src="post.featured_image" alt="Blog Post Featured Image"/>
+        </div>
+        <h2>{{post.title.rendered}}</h2>
+      </router-link>
     </li>
   </ul>
 </template>
@@ -30,7 +32,6 @@ export default {
     getPosts: async function () {
       let response = await Axios.get(`${CONFIG.API_URL}/posts?per_page=8`);
       this.posts = await this.getFeaturedImages(response.data);
-      this.$emit('postsReceived');
     },
 
     getFeaturedImages: function (posts) {
@@ -54,8 +55,9 @@ export default {
 <style scoped lang="scss">
   ul {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 320px);
     grid-gap: 1rem;
+    align-items: start;
   }
 
   li {
