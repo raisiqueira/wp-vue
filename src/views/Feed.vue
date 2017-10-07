@@ -55,13 +55,19 @@ export default {
 <style scoped lang="scss">
   ul {
     display: grid;
-    grid-template-columns: repeat(3, 320px);
+    grid-template-columns: repeat( auto-fit, minmax( 320px, auto ) );
     grid-gap: 1rem;
-    align-items: start;
   }
 
   li {
     display: flex;
     flex-direction: column;
+    background: $gray--extraLight;
+    padding: 1rem;
+  }
+
+  a {
+    text-align: center;
+    color: inherit;
   }
 </style>
