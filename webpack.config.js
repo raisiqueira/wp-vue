@@ -1,7 +1,5 @@
 var path = require('path');
 var webpack = require('webpack');
-var bourbonPath = require('bourbon').includePaths;
-var bourbonNeatPath = require('bourbon-neat').includePaths;
 
 module.exports = {
   entry: ['babel-polyfill', './src/main.js'],
@@ -18,48 +16,16 @@ module.exports = {
           loader: 'vue-loader',
           options: {
             loaders: {
-              sass: [
-                'vue-style-loader',
-                'css-loader',
-                {
-                  loader: 'sass-loader',
-                  options: {
-                    includePaths: [
-                      bourbonPath,
-                      bourbonNeatPath
-                    ]
-                  }
-                },
-                {
-                  loader: 'sass-resources-loader',
-                  options: {
-                    resources: [
-                      bourbonPath[0] + '/_bourbon.scss',
-                      bourbonNeatPath[0] + '/_neat.scss',
-                      path.resolve(__dirname, './src/assets/scss/base/_variables.scss'),
-                      path.resolve(__dirname, './src/assets/scss/base/_mixins.scss'),
-                    ]
-                  }
-                }
-              ],
               scss: [
                 'vue-style-loader',
                 'css-loader',
                 {
-                  loader: 'sass-loader',
-                  options: {
-                    includePaths: [
-                      bourbonPath,
-                      bourbonNeatPath
-                    ]
-                  }
+                  loader: 'sass-loader'
                 },
                 {
                   loader: 'sass-resources-loader',
                   options: {
                     resources: [
-                      bourbonPath[0] + '/_bourbon.scss',
-                      bourbonNeatPath[0] + '/_neat.scss',
                       path.resolve(__dirname, './src/assets/scss/_variables.scss'),
                       path.resolve(__dirname, './src/assets/scss/_mixins.scss'),
                     ]
@@ -98,13 +64,12 @@ module.exports = {
     hints: false
   },
   devtool: '#eval-source-map'
-}
-
-// module.exports.plugins = [new webpack.DefinePlugin(CONFIG)];
+};
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports.devtool = '#source-map'
-  // http://vue-loader.vuejs.org/en/workflow/production.html
+
+  module.exports.devtool = false;
+
   module.exports.plugins = (module.exports.plugins || []).concat([
     new webpack.DefinePlugin({
       'process.env': {
@@ -120,5 +85,5 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.LoaderOptionsPlugin({
       minimize: true
     })
-  ])
+  ]);
 }

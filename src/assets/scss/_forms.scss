@@ -23,12 +23,6 @@ label {
 input,
 select,
 textarea {
-  display: block;
-  font-family: $base-font-family;
-  font-size: 16px;
-}
-
-#{$all-text-inputs} {
   appearance: none;
   background-color: $base-background-color;
   border: $base-border;
@@ -39,6 +33,9 @@ textarea {
   padding: $base-spacing / 3;
   transition: border-color $base-duration $base-timing;
   width: 100%;
+  display: block;
+  font-family: $base-font-family;
+  font-size: 16px;
 
   &:hover {
     border-color: shade($base-border-color, 20%);
