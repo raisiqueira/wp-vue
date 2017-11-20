@@ -63,7 +63,12 @@ module.exports = {
   performance: {
     hints: false
   },
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
+  plugins: [
+    new webpack.DefinePlugin({
+      API_URL: JSON.stringify('https://www.wptavern.com/wp-json/wp/v2')
+    })
+  ]
 };
 
 if (process.env.NODE_ENV === 'production') {
@@ -86,4 +91,5 @@ if (process.env.NODE_ENV === 'production') {
       minimize: true
     })
   ]);
+
 }

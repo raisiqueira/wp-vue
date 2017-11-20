@@ -1,26 +1,58 @@
 <template>
-  <ul>
-    <li v-for="post in posts" :key="post.id">
-      <router-link :to="{ name: 'post', params: {slug: post.slug} }">
+  <div>
+    <ul>
+      <li v-for="post in posts" :key="post.id">
         <div>
-          <img :src="post.featured_image" alt="Blog Post Featured Image"/>
+          <router-link :to="{ name: 'post', params: {slug: post.slug} }">
+            <img :src="post.featured_image" alt="Blog Post Featured Image"/>
+          </router-link>
         </div>
-        <h2>{{post.title.rendered}}</h2>
-      </router-link>
-    </li>
-  </ul>
+        <span>
+          <i>&mdash;</i>
+            {{getFormattedDate(post.date)}}
+          <i>&mdash;</i>
+        </span>
+        <h2>
+          <router-link :to="{ name: 'post', params: {slug: post.slug} }">
+            {{post.title.rendered}}
+          </router-link>
+        </h2>
+      </li>
+    </ul>
+
+    <Pagination
+      :currentPage="parseInt(page)"
+      :totalPages="parseInt(totalPages)"
+      @next="page = page + 1"
+      @previous="page = page - 1">
+    </Pagination>
+
+  </div>
 </template>
 
 <script>
-import CONFIG from '../model/config.js';
 import Axios from 'axios';
+import Pagination from '../components/Pagination';
 
 export default {
   name: 'Feed',
 
   data () {
     return {
-      posts: []
+      posts: [],
+      page: 1,
+      totalPosts: null,
+      totalPages: null
+    }
+  },
+
+  watch: {
+    page: function () {
+      this.getPosts();
+    },
+
+    '$route.params.page': function () {
+      this.getPosts();
     }
   },
 
@@ -28,9 +60,19 @@ export default {
     this.getPosts();
   },
 
+  created: function () {
+    if(this.$route.name === 'page') {
+      this.page = this.$route.params.page;
+    }
+  },
+
   methods: {
     getPosts: async function () {
-      let response = await Axios.get(`${CONFIG.API_URL}/posts?per_page=8`);
+      let response = await Axios.get(`${API_URL}/posts?per_page=8&page=${this.page}`);
+
+      this.totalPosts = response.headers['x-wp-total'];
+      this.totalPages = response.headers['x-wp-totalpages'];
+
       this.posts = await this.getFeaturedImages(response.data);
     },
 
@@ -38,8 +80,8 @@ export default {
       return new Promise((resolve) => {
         let requests = posts.map((post) => {
           return new Promise( async (resolve) => {
-            let response = await Axios.get(`${CONFIG.API_URL}/media/${post.featured_media}`);
-            post.featured_image = response.data.media_details.sizes['post-thumbnail'].source_url;
+            let response = await Axios.get(`${API_URL}/media/${post.featured_media}`);
+            post.featured_image = response.data.media_details.sizes['medium'].source_url;
             resolve(post);
           });
         });
@@ -47,6 +89,10 @@ export default {
         Promise.all(requests).then((posts) => resolve(posts));
       });
     }
+  },
+
+  components: {
+    Pagination
   }
 }
 
@@ -64,10 +110,44 @@ export default {
     flex-direction: column;
     background: $gray--extraLight;
     padding: 1rem;
+    text-align: center;
+
+    a {
+      display: block;
+    }
+  }
+
+  img {
+    transition: box-shadow .15s ease-in-out;
+    box-shadow: 0 0 0 2px $gray--light;
+
+    &:hover {
+      box-shadow: 0 0 0 3px $gray--light;
+    }
+  }
+
+  div {
+    margin-bottom: 1rem;
+  }
+
+  span {
+    font-size: $small-font-size;
+    color: $gray--medium;
+  }
+
+  h2 {
+    margin: .25rem 0 1rem;
   }
 
   a {
-    text-align: center;
     color: inherit;
+
+    &:hover {
+      color: $salmon;
+    }
+
+    &:focus {
+      outline: none;
+    }
   }
 </style>

@@ -15,6 +15,11 @@ const routes = [
     name: 'post',
     path: '/posts/:slug',
     component: Post
+  },
+  {
+    name: 'page',
+    path: '/page/:page',
+    component: Feed
   }
 ];
 

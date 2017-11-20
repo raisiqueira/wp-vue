@@ -1,6 +1,7 @@
 <template>
   <div>
-    <router-link :to="{path: '/'}">Back to All Posts</router-link>
+
+    <PostNav></PostNav>
 
     <article>
       <header>
@@ -12,15 +13,15 @@
       </header>
 
       <PostBody :content="content"></PostBody>
-
     </article>
+
   </div>
 </template>
 
 <script>
-import CONFIG from '../model/config.js';
 import Axios from 'axios';
 import PostBody from '../components/PostBody';
+import PostNav from '../components/PostNav';
 
 const getterSetter = function (property) {
   return {
@@ -59,18 +60,19 @@ export default {
 
   methods: {
     getPost: async function () {
-      let response = await Axios.get(`${CONFIG.API_URL}/posts?slug=${this.$route.params.slug}`);
+      let response = await Axios.get(`${API_URL}/posts?slug=${this.$route.params.slug}`);
       return response.data[0];
     },
 
     getFeaturedImage: async function (id) {
-      let response = await Axios.get(`${CONFIG.API_URL}/media/${id}`);
+      let response = await Axios.get(`${API_URL}/media/${id}`);
       return response.data.media_details.sizes['medium'].source_url;
     }
   },
 
   components: {
-    PostBody
+    PostBody,
+    PostNav
   }
 }
 </script>
@@ -89,5 +91,10 @@ export default {
 
   h1 {
     margin: 2rem 0;
+  }
+
+  a {
+    display: block;
+    margin-bottom: 1rem;
   }
 </style>

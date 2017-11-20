@@ -1,10 +1,16 @@
 // Typography
-$heading-font-family: 'Raleway', sans-serif;
+$heading-font-family: 'Nunito', sans-serif;
 $base-font-family: 'Open Sans', sans-serif;
 
 // Line height
 $base-line-height: 1.5;
 $heading-line-height: 1.2;
+
+// Font sizes
+$header-font-size: 2rem;
+$medium-font-size: 1.5rem;
+$base-font-size: 1rem;
+$small-font-size: .75rem;
 
 // Other Sizes
 $base-border-radius: 3px;
@@ -19,10 +25,11 @@ $gray: #333;
 $gray--medium: #999;
 $gray--light: #ddd;
 $gray--extraLight: #fafafa;
+$salmon: #E56B70;
 
 // Font Colors
 $base-font-color: $gray;
-$action-color: $blue;
+$action-color: $salmon;
 
 // Border
 $base-border-color: $gray--light;
