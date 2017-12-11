@@ -11,7 +11,7 @@
       </li>
       <li>
         <router-link
-          :to="{ name: 'page', params: {page: this.currentPage + 1} }"
+          :to="{ name: 'page', param: {page: this.currentPage + 1} }"
         >
           Next Page
         </router-link>

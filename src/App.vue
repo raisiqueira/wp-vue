@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div id="wrapper">
-      <Loading v-if="isLoading" />
+      <transition name="fade">
+        <Loading v-if="isLoading" />
+      </transition>
       <router-view></router-view>
     </div>
   </div>
@@ -20,13 +22,9 @@
       }
     },
 
-    created: function {
-      bus.$on('turnOnLoading', () => {
-        this.isLoading = true;
-      });
-
-      bus.$on('turnOffLoading' () => {
-        this.isLoading = false;
+    created: function () {
+      bus.$on('toggleLoading', (status) => {
+        this.isLoading = status;
       });
     },
 
@@ -48,5 +46,13 @@
   #wrapper {
     max-width: 1200px;
     margin: 0 auto;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0
   }
 </style>
