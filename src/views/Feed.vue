@@ -1,20 +1,21 @@
 <template>
   <div>
+
     <ul>
       <li v-for="post in posts" :key="post.id">
         <div>
-          <router-link :to="{ name: 'post', params: {slug: post.slug} }">
+          <router-link :to="{ name: 'post', params: { slug: post.slug } }">
             <img :src="post.featured_image" alt="Blog Post Featured Image"/>
           </router-link>
         </div>
         <span>
           <i>&mdash;</i>
-            {{getFormattedDate(post.date)}}
+            {{ getFormattedDate(post.date) }}
           <i>&mdash;</i>
         </span>
         <h2>
-          <router-link :to="{ name: 'post', params: {slug: post.slug} }">
-            {{post.title.rendered}}
+          <router-link :to="{ name: 'post', params: { slug: post.slug } }">
+            {{ post.title.rendered }}
           </router-link>
         </h2>
       </li>
@@ -23,8 +24,7 @@
     <Pagination
       :currentPage="parseInt(page)"
       :totalPages="parseInt(totalPages)"
-    >
-    </Pagination>
+    ></Pagination>
 
   </div>
 </template>
@@ -52,6 +52,7 @@ export default {
   },
 
   beforeRouteUpdate: function (to, from, next) {
+    this.page = to.params.page;
     this.getPosts();
   },
 
@@ -71,10 +72,6 @@ export default {
 
       this.totalPosts = response.headers['x-wp-total'];
       this.totalPages = response.headers['x-wp-totalpages'];
-
-      console.log('Current Page: ' + this.page);
-      console.log('Total Pages: ' + this.totalPages);
-      console.log('Total Posts: ' + this.totalPosts);
 
       this.posts = await this.getFeaturedImages(response.data);
     },
