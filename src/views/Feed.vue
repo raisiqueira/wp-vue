@@ -23,8 +23,7 @@
     <Pagination
       :currentPage="parseInt(page)"
       :totalPages="parseInt(totalPages)"
-      @next="page = page + 1"
-      @previous="page = page - 1">
+    >
     </Pagination>
 
   </div>
@@ -49,11 +48,11 @@ export default {
   watch: {
     page: function () {
       this.getPosts();
-    },
-
-    '$route.params.page': function () {
-      this.getPosts();
     }
+  },
+
+  beforeRouteUpdate: function (to, from, next) {
+    this.getPosts();
   },
 
   mounted: function () {
@@ -72,6 +71,10 @@ export default {
 
       this.totalPosts = response.headers['x-wp-total'];
       this.totalPages = response.headers['x-wp-totalpages'];
+
+      console.log('Current Page: ' + this.page);
+      console.log('Total Pages: ' + this.totalPages);
+      console.log('Total Posts: ' + this.totalPosts);
 
       this.posts = await this.getFeaturedImages(response.data);
     },
@@ -124,10 +127,6 @@ export default {
     &:hover {
       box-shadow: 0 0 0 3px $gray--light;
     }
-  }
-
-  div {
-    margin-bottom: 1rem;
   }
 
   span {

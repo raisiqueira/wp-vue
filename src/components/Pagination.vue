@@ -2,12 +2,16 @@
   <nav>
     <ul>
       <li>
-        <router-link :to="{ name: 'page', params: {page: this.currentPage - 1} }">
+        <router-link
+          :to="{ name: 'page', params: {page: this.currentPage - 1} }"
+        >
           Previous Page
         </router-link>
       </li>
       <li>
-        <router-link :to="{ name: 'page', params: {page: this.currentPage + 1} }">
+        <router-link
+          :to="{ name: 'page', params: {page: this.currentPage + 1} }"
+        >
           Next Page
         </router-link>
       </li>
@@ -36,7 +40,7 @@ export default {
 
 <style scoped lang="scss">
   nav {
-    margin: 2rem 0;
+    margin: 2rem 0 0;
     text-align: center;
   }
 
