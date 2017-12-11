@@ -30,6 +30,7 @@
 </template>
 
 <script>
+import bus from '../bus';
 import Axios from 'axios';
 import Pagination from '../components/Pagination';
 
@@ -74,6 +75,7 @@ export default {
       this.totalPages = response.headers['x-wp-totalpages'];
 
       this.posts = await this.getFeaturedImages(response.data);
+      bus.emit('toggleLoading', false);
     },
 
     getFeaturedImages: function (posts) {
@@ -109,7 +111,7 @@ export default {
     display: flex;
     flex-direction: column;
     background: $gray--extraLight;
-    padding: 1rem;
+    padding: 2rem 1rem;
     text-align: center;
 
     a {

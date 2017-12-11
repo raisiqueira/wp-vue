@@ -2,13 +2,14 @@
   "name": "wp-vue",
   "description": "Just a Vue blog that displays posts via the WordPress REST API.",
   "version": "0.0.0",
-  "author": "Alex MacArthur",
+  "author": "Alex MacArthur <alex@macarthur.me> (https://macarthur.me)",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
+  "homepage": "https://github.com/alexmacarthur/wp-vue",
   "dependencies": {
-    "axios": "^0.16.1",
+    "axios": "^0.17.1",
     "vue": "^2.5.9",
     "vue-router": "^3.0.1"
   },

@@ -1,14 +1,38 @@
 <template>
   <div id="app">
     <div id="wrapper">
+      <Loading v-if="isLoading" />
       <router-view></router-view>
     </div>
   </div>
 </template>
 
 <script>
+  import bus from './bus';
+  import Loading from './components/Loading';
+
   export default {
-    name: 'app'
+    name: 'App',
+
+    data () {
+      return {
+        isLoading: true
+      }
+    },
+
+    created: function {
+      bus.$on('turnOnLoading', () => {
+        this.isLoading = true;
+      });
+
+      bus.$on('turnOffLoading' () => {
+        this.isLoading = false;
+      });
+    },
+
+    components: {
+      Loading
+    }
   }
 </script>
 

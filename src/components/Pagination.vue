@@ -3,6 +3,7 @@
     <ul>
       <li>
         <router-link
+          class="{'is-disabled' : currentPage === 1}"
           :to="{ name: 'page', params: {page: this.currentPage - 1} }"
         >
           Previous Page
@@ -47,7 +48,7 @@ export default {
   ul {
     display: flex;
     justify-content: center;
-    margin-bottom: .25rem;
+    margin-bottom: 1rem;
   }
 
   li {
