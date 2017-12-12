@@ -42,6 +42,11 @@ a {
     outline: $focus-outline;
     outline-offset: $focus-outline-offset;
   }
+
+  &.is-disabled {
+    pointer-events: none;
+    opacity: .5;
+  }
 }
 
 hr {

@@ -3,7 +3,7 @@
     <ul>
       <li>
         <router-link
-          class="{'is-disabled' : currentPage === 1}"
+          :class="{'is-disabled' : currentPage === 1}"
           :to="{ name: 'page', params: {page: this.currentPage - 1} }"
         >
           Previous Page
@@ -11,6 +11,7 @@
       </li>
       <li>
         <router-link
+          :class="{'is-disabled' : currentPage === this.totalPages}"
           :to="{ name: 'page', params: {page: this.currentPage + 1} }"
         >
           Next Page

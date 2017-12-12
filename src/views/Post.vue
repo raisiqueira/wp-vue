@@ -19,62 +19,65 @@
 </template>
 
 <script>
-import Axios from 'axios';
-import PostBody from '../components/PostBody';
-import PostNav from '../components/PostNav';
+  import bus from '../bus';
+  import Axios from 'axios';
+  import PostBody from '../components/PostBody';
+  import PostNav from '../components/PostNav';
 
-const getterSetter = function (property) {
-  return {
-    get: function () {
-      return this.post.hasOwnProperty(property)
-        ? this.post[property].rendered
-        : '';
-    },
-
-    set: function (value) {
-      return this.post[property].rendered = value;
-
-    }
-  }
-};
-
-export default {
-  name: 'Post',
-
-  data () {
+  const getterSetter = function (property) {
     return {
-      post: {},
-      featured_image: ''
+      get: function () {
+        return this.post.hasOwnProperty(property)
+          ? this.post[property].rendered
+          : '';
+      },
+
+      set: function (value) {
+        return this.post[property].rendered = value;
+
+      }
     }
-  },
+  };
 
-  computed: {
-    title: getterSetter('title'),
-    content: getterSetter('content')
-  },
+  export default {
+    name: 'Post',
 
-  created: async function () {
-    this.post = await this.getPost();
-    this.featured_image = await this.getFeaturedImage(this.post.featured_media);
-  },
-
-  methods: {
-    getPost: async function () {
-      let response = await Axios.get(`${API_URL}/posts?slug=${this.$route.params.slug}`);
-      return response.data[0];
+    data () {
+      return {
+        post: {},
+        featured_image: ''
+      }
     },
 
-    getFeaturedImage: async function (id) {
-      let response = await Axios.get(`${API_URL}/media/${id}`);
-      return response.data.media_details.sizes['medium'].source_url;
-    }
-  },
+    computed: {
+      title: getterSetter('title'),
+      content: getterSetter('content')
+    },
 
-  components: {
-    PostBody,
-    PostNav
+    created: async function () {
+      this.post = await this.getPost();
+      this.featured_image = await this.getFeaturedImage(this.post.featured_media);
+
+      bus.$emit('toggleLoading', false);
+    },
+
+    methods: {
+      getPost: async function () {
+        let response = await Axios.get(`${API_URL}/posts?slug=${this.$route.params.slug}`);
+        return response.data[0];
+      },
+
+      getFeaturedImage: async function (id) {
+        let response = await Axios.get(`${API_URL}/media/${id}`);
+        return response.data.media_details.sizes['medium'].source_url;
+      }
+    },
+
+    components: {
+      PostBody,
+      PostNav
+    }
   }
-}
 </script>
 
 <style scoped lang="scss">

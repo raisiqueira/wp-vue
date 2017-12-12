@@ -1,3 +1,3 @@
 module.exports = {
-  API_URL: JSON.stringify('https://www.wptavern.com/wp-json/wp/v2')
+  API_URL: JSON.stringify('http://businessboutique.dev/wp-json/wp/v2/posts')
 };

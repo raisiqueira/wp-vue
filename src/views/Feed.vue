@@ -133,6 +133,7 @@ export default {
   span {
     font-size: $small-font-size;
     color: $gray--medium;
+    margin: 1rem 0 .5rem;
   }
 
   h2 {
