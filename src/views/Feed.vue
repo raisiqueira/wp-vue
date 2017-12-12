@@ -41,7 +41,6 @@ export default {
     return {
       posts: [],
       page: 1,
-      totalPosts: null,
       totalPages: null
     }
   },
@@ -53,9 +52,9 @@ export default {
   },
 
   beforeRouteUpdate: function (to, from, next) {
-    console.log('changed');
     this.page = to.params.page;
     this.getPosts();
+    next();
   },
 
   mounted: function () {
@@ -74,7 +73,6 @@ export default {
 
       let response = await Axios.get(`${API_URL}/posts?per_page=8&page=${this.page}`);
 
-      this.totalPosts = response.headers['x-wp-total'];
       this.totalPages = response.headers['x-wp-totalpages'];
 
       this.posts = await this.getFeaturedImages(response.data);
